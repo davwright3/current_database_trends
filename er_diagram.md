@@ -9,9 +9,53 @@
 erDiagram
 
 Customer{
- CustSSN integer PK
- CustID integer PK    
+ CustID integer PK
+ CustSSN integer FK     
 }
 
+CustomerData{
+ CustSSN integer PK
+ Fname varchar2(100)
+ Lname varchar2(100)
+ Address varchar2(150)
+ PhoneNum integer 
+}
+
+Investment{
+ InvestID integer PK
+ CustID integer FK
+ InvestType varchar(100)
+ InvestAmt number
+ Balance number
+}
+
+Loan{
+ LoanID integer PK
+ CustID integer FK
+ LoanType varchar2(100)
+ LoanAmt number
+ IntRate number
+ Balance number
+}
+
+Transaction{
+ TransID integer PK
+ AcctNo integer FK
+ TransType varchar2(100)
+ Amount number
+}
+
+Account{
+ AcctNo integer PK
+ CustID integer FK
+ AcctType varchar2(100)
+ Balance number
+}
+
+Customer ||--|| CustomerData : has
+Customer ||--|{ Account : has
+Customer }|--|{ Investment : has
+Customer }|--|{ Loan : has
+Account ||--|{ Transaction : uses
 
 ```
